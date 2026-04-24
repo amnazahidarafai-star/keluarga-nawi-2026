@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Borang Keluarga Besar Hj Nawi 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#F0EDE8;
+  --panel:#FFFDF9;
+  --teal:#0B5E57;
+  --teal-mid:#0F766E;
+  --teal-light:#CCEDE9;
+  --teal-pale:#EAF5F3;
+  --amber:#C27803;
+  --amber-pale:#FEF3C7;
+  --ink:#1A2420;
+  --muted:#5A6A65;
+  --line:#D8E4E2;
+  --radius:20px;
+  --shadow:0 8px 40px rgba(11,94,87,.10);
+  --ok:#065F46;
+  --ok-bg:#ECFDF5;
+  --er:#991B1B;
+  --er-bg:#FEF2F2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  min-height:100vh;
+  padding:0;
+}
+
+/* ── ornamental top strip ── */
+.strip{
+  height:6px;
+  background:linear-gradient(90deg, var(--teal) 0%, #14B8A6 50%, var(--amber) 100%);
+}
+
+/* ── hero ── */
+.hero{
+  background:linear-gradient(135deg, var(--teal) 0%, #0D4E47 60%, #143B36 100%);
+  padding:44px 24px 40px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 10% 50%, rgba(255,255,255,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 90% 20%, rgba(20,184,166,.12) 0%, transparent 55%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-block;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.85);
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:6px 14px;
+  border-radius:999px;
+  margin-bottom:18px;
+  font-weight:500;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,5vw,42px);
+  font-weight:900;
+  color:#fff;
+  line-height:1.15;
+  margin-bottom:12px;
+}
+.hero h1 em{
+  font-style:normal;
+  color:#5EEAD4;
+}
+.hero p{
+  color:rgba(255,255,255,.75);
+  font-size:15px;
+  max-width:560px;
+  margin:0 auto 22px;
+  line-height:1.65;
+  font-weight:300;
+}
+.hero-pills{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.pill{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.80);
+  padding:7px 13px;
+  border-radius:999px;
+  font-size:12.5px;
+  font-weight:500;
+}
+
+/* ── layout ── */
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 60px}
+
+/* ── progress steps ── */
+.progress{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  margin:28px 0 24px;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  padding:4px 0;
+}
+.step-node{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+}
+.step-circle{
+  width:36px;height:36px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;
+  border:2px solid var(--line);
+  background:var(--panel);
+  color:var(--muted);
+  transition:all .3s;
+  position:relative;
+  z-index:1;
+}
+.step-circle.active{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 0 0 4px rgba(11,94,87,.15)}
+.step-circle.done{background:var(--teal-light);color:var(--teal);border-color:var(--teal-light)}
+.step-label{font-size:11px;color:var(--muted);font-weight:500;text-align:center;max-width:70px;line-height:1.3}
+.step-label.active{color:var(--teal);font-weight:600}
+.step-line{width:32px;height:2px;background:var(--line);margin-bottom:22px;flex-shrink:0;transition:background .3s}
+.step-line.done{background:var(--teal-light)}
+
+/* ── card ── */
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:32px;
+  margin-bottom:20px;
+  display:none;
+}
+.card.active{display:block;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.card-header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:24px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+.card-icon{
+  width:44px;height:44px;
+  background:var(--teal-pale);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+}
+.card-header h2{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  font-weight:700;
+  color:var(--teal);
+}
+.card-header p{font-size:13.5px;color:var(--muted);line-height:1.5;margin-top:3px}
+
+/* ── grid & fields ── */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.full{grid-column:1/-1}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+.field{display:flex;flex-direction:column;gap:6px}
+label{font-size:13px;font-weight:600;color:var(--ink)}
+label .req{color:var(--amber);margin-left:2px}
+input:not([type=checkbox]),select,textarea{
+  padding:12px 14px;
+  border:1.5px solid var(--line);
+  border-radius:12px;
+  font-size:14.5px;
+  font-family:'DM Sans',sans-serif;
+  background:#fff;
+  color:var(--ink);
+  transition:border-color .2s, box-shadow .2s;
+  -webkit-appearance:none;
+  appearance:none;
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6A65' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  padding-right:38px;
+}
+input:not([type=checkbox]):focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--teal-mid);
+  box-shadow:0 0 0 3px rgba(15,118,110,.12);
+}
+input:not([type=checkbox]).error,select.error{border-color:#EF4444;box-shadow:0 0 0 3px rgba(239,68,68,.10)}
+textarea{min-height:88px;resize:vertical}
+.hint{font-size:11.5px;color:var(--muted);line-height:1.4}
+
+/* age box */
+.age-display{
+  padding:12px 14px;
+  border:1.5px dashed var(--line);
+  border-radius:12px;
+  font-size:14.5px;
+  font-weight:600;
+  color:var(--teal);
+  background:var(--teal-pale);
+  min-height:47px;
+  display:flex;align-items:center;
+}
+
+/* divider */
+.divider{height:1px;background:var(--line);margin:26px 0}
+
+/* ── summary panel ── */
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:12px;
+}
+.summary-item{
+  background:var(--teal-pale);
+  border-radius:12px;
+  padding:14px 16px;
+}
+.summary-item .s-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.summary-item .s-val{font-size:14px;font-weight:600;color:var(--ink);word-break:break-word}
+.summary-item.empty .s-val{color:var(--muted);font-style:italic;font-weight:400}
+
+/* ── checkbox ── */
+.check-label{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  cursor:pointer;
+  line-height:1.55;
+  font-size:13.5px;
+}
+.check-label input[type=checkbox]{
+  width:18px;height:18px;
+  border-radius:5px;
+  flex-shrink:0;
+  margin-top:2px;
+  accent-color:var(--teal);
+  cursor:pointer;
+  padding:0;
+}
+
+/* ── navigation buttons ── */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:28px;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.btn{
+  padding:13px 24px;
+  border-radius:12px;
+  font-size:14.5px;
+  font-weight:600;
+  font-family:'DM Sans',sans-serif;
+  cursor:pointer;
+  border:none;
+  transition:all .2s;
+  display:flex;align-items:center;gap:8px;
+}
+.btn-primary{
+  background:var(--teal);color:#fff;
+  box-shadow:0 4px 14px rgba(11,94,87,.25);
+}
+.btn-primary:hover{background:#0a4d47;transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-secondary{background:var(--panel);color:var(--ink);border:1.5px solid var(--line)}
+.btn-secondary:hover{border-color:var(--teal);color:var(--teal)}
+.btn-ghost{background:transparent;color:var(--muted);font-size:13px;padding:10px 0}
+.btn-ghost:hover{color:var(--teal)}
+
+/* ── messages ── */
+.msg{
+  padding:16px 18px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.6;
+  display:none;
+  margin-top:16px;
+}
+.msg-ok{background:var(--ok-bg);color:var(--ok);border:1px solid #A7F3D0}
+.msg-err{background:var(--er-bg);color:var(--er);border:1px solid #FECACA}
+
+/* ── success screen ── */
+.success-screen{
+  display:none;
+  text-align:center;
+  padding:40px 24px;
+}
+.success-screen .tick{
+  width:72px;height:72px;
+  background:var(--teal-pale);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  font-size:32px;
+}
+.success-screen h2{
+  font-family:'Playfair Display',serif;
+  font-size:26px;color:var(--teal);
+  margin-bottom:10px;
+}
+.success-screen p{color:var(--muted);line-height:1.65;max-width:400px;margin:0 auto 20px}
+
+/* ── field note ── */
+.note-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--amber-pale);
+  color:var(--amber);
+  border:1px solid #FDE68A;
+  border-radius:999px;
+  font-size:11.5px;font-weight:600;
+  padding:4px 10px;
+  margin-bottom:14px;
+}
+
+@media(max-width:640px){
+  .grid,.trio{grid-template-columns:1fr}
+  .card{padding:22px 18px}
+  .summary-grid{grid-template-columns:1fr}
+  .hero{padding:32px 18px 28px}
+  .step-line{width:20px}
+}
+.gen5-row{display:flex;gap:8px;align-items:center}
+.gen5-row input{flex:1}
+.gen5-remove{background:var(--er-bg);color:var(--er);border:1.5px solid #FECACA;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;flex-shrink:0}
+.gen5-remove:hover{background:#FEE2E2}
+</style>
+</head>
+<body>
+<div class="strip"></div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">Hari Keluarga • 25 April 2026</div>
+  <h1>Keluarga Besar<br><em>Hj Nawi & Hjh Aisyah</em></h1>
+  <p>Isi borang ini untuk mendaftarkan diri ke dalam pangkalan data keluarga 2026. Masa yang diperlukan: lebih kurang 3 minit.</p>
+  <div class="hero-pills">
+    <div class="pill">🏠 2 Keluarga Besar</div>
+    <div class="pill">📲 QR Code Ready</div>
+    <div class="pill">🎁 Cabutan Bertuah</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ── PROGRESS ── -->
+  <div class="progress" id="progressBar"></div>
+
+  <!-- ══════════════════════ STEP 1 – Maklumat Asas & Peribadi ══════════════════════ -->
+  <div class="card active" id="step1">
+    <div class="card-header">
+      <div class="card-icon">🏡</div>
+      <div>
+        <h2>Maklumat Asas & Peribadi</h2>
+        <p>Nama, maklumat peribadi, dan status ahli keluarga.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="field full">
+        <label for="nama_penuh">Nama Penuh <span class="req">*</span></label>
+        <input id="nama_penuh" name="nama_penuh" placeholder="Contoh: Ahmad bin Abdullah" required/>
+      </div>
+
+      <div class="field">
+        <label for="no_hp">No. Telefon <span class="req">*</span></label>
+        <input id="no_hp" name="no_hp" type="tel" placeholder="Contoh: 0123456789 / +60123456789" required/>
+        <span class="hint">Boleh nombor Malaysia atau antarabangsa. Tiada had format.</span>
+      </div>
+
+      <div class="field">
+        <label for="jantina">Jantina <span class="req">*</span></label>
+        <select id="jantina" name="jantina" required>
+          <option value="">— Sila Pilih —</option>
+          <option>Lelaki</option>
+          <option>Perempuan</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="tarikh_lahir">Tarikh Lahir <span class="req">*</span></label>
+        <input id="tarikh_lahir" name="tarikh_lahir" type="date" required/>
+      </div>
+
+      <div class="field">
+        <label>Umur (Dikira Automatik)</label>
+        <div class="age-display" id="umur_display">— isi tarikh lahir —</div>
+      </div>
+
+      <div class="field">
+        <label for="negeri">Negeri Kediaman</label>
+        <select id="negeri" name="negeri">
+          <option value="">— Sila Pilih —</option>
+          <option>Johor</option><option>Kedah</option><option>Kelantan</option>
+          <option>Melaka</option><option>Negeri Sembilan</option><option>Pahang</option>
+          <option>Perak</option><option>Perlis</option><option>Pulau Pinang</option>
+          <option>Sabah</option><option>Sarawak</option><option>Selangor</option>
+          <option>Terengganu</option><option>W.P. Kuala Lumpur</option>
+          <option>W.P. Labuan</option><option>W.P. Putrajaya</option>
+          <option>Lain-lain</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label for="alamat">Alamat / Kawasan Tempat Tinggal</label>
+        <textarea id="alamat" name="alamat" placeholder="Contoh: Taman Sri Muda, Shah Alam, Selangor"></textarea>
+      </div>
+
+      <div class="field full">
+        <label for="status_ahli">Status Ahli Keluarga <span class="req">*</span></label>
+        <select id="status_ahli" name="status_ahli" required>
+          <option value="">— Sila Pilih —</option>
+          <option>Bloodline / Keturunan</option>
+          <option>Menantu</option>
+          <option>Lain-lain</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="nav">
+      <span></span>
+      <button class="btn btn-primary" onclick="goTo(2)">Seterusnya ›</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ STEP 2 – Keturunan ══════════════════════ -->
+  <div class="card" id="step2">
+    <div class="card-header">
+      <div class="card-icon">🌳</div>
+      <div>
+        <h2>Struktur Keturunan</h2>
+        <p>Isi mengikut tahap yang diketahui. Boleh tinggalkan kosong jika tidak pasti.</p>
+      </div>
+    </div>
+
+    <div class="note-tag">💡 Praktikal dulu — boleh dikemaskini selepas acara</div>
+
+    <div class="grid">
+      <div class="field full">
+        <label for="gen1">Keluarga Besar (Generasi 1) <span class="req">*</span></label>
+        <select id="gen1" name="keturunan_generasi_1" required>
+          <option value="">— Sila Pilih —</option>
+          <option>Keluarga Besar Hj Nawi &amp; Hjh Aisyah</option>
+          <option>Keluarga Besar Al-Faqeh</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label for="gen2">Generasi 2</label>
+        <select id="gen2" name="keturunan_generasi_2" disabled>
+          <option value="">— Pilih Generasi 1 dahulu —</option>
+        </select>
+        <span class="hint">Pilihan akan berubah mengikut keluarga besar di atas.</span>
+      </div>
+
+      <div class="field full">
+        <label for="gen3">Generasi 3</label>
+        <select id="gen3" name="keturunan_generasi_3" disabled>
+          <option value="">— Pilih Generasi 2 dahulu —</option>
+        </select>
+        <span class="hint">Pilihan akan berubah mengikut cabang di atas.</span>
+      </div>
+
+      <div class="field" id="gen4_wrapper">
+        <label for="gen4">Generasi 4</label>
+        <select id="gen4" name="laluan_generasi_4" disabled>
+          <option value="">— Pilih Generasi 3 dahulu —</option>
+        </select>
+        <input id="gen4_text" name="laluan_generasi_4_text" placeholder="Taip nama di sini..." style="display:none" disabled/>
+      </div>
+
+      <!-- Gen 5 dropdown (when data exists) -->
+      <div class="field full" id="gen5_select_wrapper" style="display:none">
+        <label id="gen5_label_mode">Generasi 5</label>
+        <select id="gen5_select" name="keturunan_generasi_5_sel" disabled>
+          <option value="">— Pilih Generasi 4 dahulu —</option>
+        </select>
+      </div>
+
+      <!-- Gen 5 free-text (when no data) -->
+      <div class="field full" id="gen5_wrapper" style="display:none">
+        <label>Generasi 5 <span style="font-weight:400;color:var(--muted)">(boleh tambah lebih dari satu, Jika ada pasangan, letak nama pasangan selepas nama anda - cth: Ahmad Bin Abdullah/Siti Binti Ali)</span></label>
+        <div id="gen5_list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+        <button type="button" id="gen5_add_btn" onclick="addGen5()" disabled
+          style="align-self:flex-start;background:var(--teal-pale);color:var(--teal);border:1.5px dashed var(--teal-light);border-radius:10px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">
+          + Tambah Nama Anak
+        </button>
+      </div>
+
+      <div class="field full" id="gen6_wrapper">
+        <label>Generasi 6 <span style="font-weight:400;color:var(--muted)">(boleh tambah lebih dari satu, Jika ada pasangan, letak nama pasangan selepas nama anda - cth: Ahmad Bin Abdullah/Siti Binti Ali)</span></label>
+        <div id="gen6_list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+        <button type="button" id="gen6_add_btn" onclick="addGen6()"
+          style="align-self:flex-start;background:var(--teal-pale);color:var(--teal);border:1.5px dashed var(--teal-light);border-radius:10px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">
+          + Tambah Nama Anak
+        </button>
+      </div>
+
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(1)">‹ Kembali</button>
+      <button class="btn btn-primary" onclick="goTo(3)">Seterusnya ›</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ STEP 3 – Pendidikan & Kerjaya ══════════════════════ -->
+  <div class="card" id="step3">
+    <div class="card-header">
+      <div class="card-icon">🎓</div>
+      <div>
+        <h2>Pendidikan & Kerjaya</h2>
+        <p>Maklumat ini membantu analisa profil keluarga.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label for="pelajaran">Pelajaran Tertinggi <span class="req">*</span></label>
+        <select id="pelajaran" name="pelajaran" required>
+          <option value="">— Sila Pilih —</option>
+          <option>SPM</option><option>Sijil</option><option>Diploma</option>
+          <option>Degree</option><option>Master</option><option>PHD</option>
+          <option>Hafiz 30 Juzuk</option><option>Alim</option><option>Lain-lain</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="bidang">Bidang Pengkhususan</label>
+        <input id="bidang" name="bidang" placeholder="Contoh: Kejuruteraan Awam, Perakaunan"/>
+      </div>
+
+      <div class="field">
+        <label for="status_kerjaya">Status Kerjaya <span class="req">*</span></label>
+        <select id="status_kerjaya" name="status_kerjaya" required>
+          <option value="">— Sila Pilih —</option>
+          <option>Pelajar</option><option>Pesara</option><option>Penjawat Awam</option>
+          <option>Swasta</option><option>Usahawan</option><option>Suri Rumah</option>
+          <option>Lain-lain</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="industri">Industri / Sektor</label>
+        <select id="industri" name="industri">
+          <option value="">— Sila Pilih —</option>
+          <option>Kerajaan</option><option>GLC</option><option>Swasta</option>
+          <option>Pendidikan</option><option>Kesihatan</option><option>Kejuruteraan</option>
+          <option>Minyak & Gas</option><option>Kewangan</option><option>Teknologi / IT</option>
+          <option>Peruncitan</option><option>Pembinaan</option><option>Perundangan</option>
+          <option>Keagamaan</option><option>Keusahawanan / Perniagaan Sendiri</option>
+          <option>Tidak Bekerja</option><option>Lain-lain</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="jawatan">Jawatan Semasa / Tertinggi</label>
+        <input id="jawatan" name="jawatan" placeholder="Contoh: Pengurus Kanan, Jurutera"/>
+      </div>
+
+      <div class="field">
+        <label for="organisasi">Nama Organisasi / Majikan</label>
+        <input id="organisasi" name="organisasi" placeholder="Nama syarikat atau jabatan"/>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(2)">‹ Kembali</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Seterusnya ›</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ STEP 4 – Pengesahan ══════════════════════ -->
+  <div class="card" id="step4">
+    <div class="card-header">
+      <div class="card-icon">✅</div>
+      <div>
+        <h2>Semak & Hantar</h2>
+        <p>Semak ringkasan maklumat dan sahkan penghantaran.</p>
+      </div>
+    </div>
+
+    <div class="summary-grid" id="summaryGrid"></div>
+
+    <div class="divider"></div>
+
+    <div class="grid">
+      <div class="field">
+        <label for="hadir">Hadir Hari Keluarga 25 April 2026? <span class="req">*</span></label>
+        <select id="hadir" name="hadir_family_day" required>
+          <option value="">— Sila Pilih —</option>
+          <option>Ya</option>
+          <option>Tidak</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="cabutan">Setuju nama dimasukkan dalam cabutan bertuah? <span class="req">*</span></label>
+        <select id="cabutan" name="setuju_cabutan" required>
+          <option value="">— Sila Pilih —</option>
+          <option>Ya</option>
+          <option>Tidak</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label class="check-label">
+          <input type="checkbox" id="pengesahan" required/>
+          Saya mengesahkan maklumat yang diisi adalah benar setakat pengetahuan saya dan bersetuju ia digunakan untuk rekod keluarga serta analisa dalaman keluarga sahaja. <span class="req">*</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="msg msg-err" id="errMsg"></div>
+
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(3)">‹ Kembali</button>
+      <button class="btn btn-primary" id="submitBtn" onclick="submitForm()">
+        <span>Hantar Sekarang</span> 🎉
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ SUCCESS ══════════════════════ -->
+  <div class="card success-screen" id="successScreen">
+    <div class="tick">🎊</div>
+    <h2>Terima Kasih!</h2>
+    <p>Maklumat anda telah berjaya direkodkan ke dalam pangkalan data Keluarga Besar Hj Nawi & Hjh Aisyah 2026.</p>
+    <p style="margin-top:8px;font-size:13px">Semoga anda bertuah dalam cabutan bertuah Hari Keluarga!</p>
+    <button class="btn btn-secondary" style="margin:24px auto 0;width:auto" onclick="resetAll()">Daftar Ahli Lain</button>
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+const APPS_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE";
+
+// ── FAMILY DATA ──────────────────────────────────────────────────────────────
+
+// Gen 2 keyed by Gen 1
+const gen2Map = {
+  "Keluarga Besar Hj Nawi & Hjh Aisyah": [
+    "Fatimah Hj Nawi & Abdul Rahman",
+    "Hj Ariffin Hj Nawi & Zawiyah",
+    "Hj Kamaruddin Hj Nawi",
+    "Hjh Mek Aminah Hj Nawi & Wan Sulong",
+    "Hj Amiruddin Hj Nawi & Hjh Saliah Hussin",
+    "Hjh Wok Ramlah Hj Nawi",
+  ],
+  "Keluarga Besar Al-Faqeh": [
+    "Hj Abdullah Bin Fakeh & Hjh Kalsom Hj Nawi",
+    "Hj Elias Bin Jamil & Hjh Zabedah Ibrahim",
+    "Hj Harun Bin Pakeh & Hjh Noriah Binti Mat Shah",
+    "Hj Othman Bin Fakeh & Hjh Habsah Daud",
+  ],
+};
+
+// Gen 3 keyed by Gen 2
+const gen3Map = {
+  // ── Hj Nawi ──
+  "Fatimah Hj Nawi & Abdul Rahman": [
+    "Hjh Zabedah Rahman",
+    "Hjh Jumaiyah Rahman",
+    "Hj Kamal Rahman",
+    "Hjh Zaleha Rahman & Hj Shahrani Abdullah",
+  ],
+  "Hj Ariffin Hj Nawi & Zawiyah": [
+    "Wahab Hj Ariffin",
+    "Latip Hj Ariffin",
+    "Ina Hj Ariffin",
+  ],
+  "Hj Kamaruddin Hj Nawi": [
+    "Abdul Rahman Hj Kamaruddin",
+    "Fajardin Hj Kamaruddin",
+    "Sulaiman Hj Kamaruddin",
+    "Husaini Hj Kamaruddin",
+    "Azizah Hj Kamaruddin",
+    "Aisyah Hj Kamaruddin",
+    "Laila Hj Kamaruddin",
+  ],
+  "Hjh Mek Aminah Hj Nawi & Wan Sulong": [
+    "Azmi Wan Sulong",
+    "Khir Wan Sulong",
+    "Maznah Wan Sulong",
+    "Sarah Wan Sulong",
+    "Sabariah Wan Sulong",
+  ],
+  "Hj Amiruddin Hj Nawi & Hjh Saliah Hussin": [
+    "Mohd Amran Hj Amiruddin & Nafisah Zakaria",
+    "Hjh Azizah Hj Amiruddin & Wan Mohamed Azian Bin Wan Ramlan",
+    "Hj Asaari Hj Amiruddin & Hjh Zubaini Zakaria",
+    "Abd Halim Hj Amiruddin & Salmah Bte Hj Abdullah",
+    "Saleha Hj Amiruddin & Mohd Faizal Mohd Nor",
+    "Noor Azah Hj Amiruddin & Hj Roslan B Hj Dabal",
+  ],
+  "Hjh Wok Ramlah Hj Nawi": [],
+
+  // ── Al-Faqeh ──
+  "Hj Abdullah Bin Fakeh & Hjh Kalsom Hj Nawi": [
+    "Hj Mohd Nor Hj Abdullah & Hjh Noraini",
+    "Hj Mohammad Kassim Hj Abdullah & Hjh Sawiah Hj Sutan",
+    "Hj Ahmad Rafai Hj Abdullah & Hjh Kamariah Abd Ghani",
+    "Hj Mahmud Hj Abdullah & Hjh Shahirul Azian Mohamed Amin",
+    "Hj Diaudin@Yaudin Hj Abdullah & Hjh Masiah Bt Sidek",
+    "Hjh Hendon Hj Abdullah & Hj Mohamad Hj Hashim",
+    "Hjh Zainab Hj Abdullah & Hj Abdul Halim Harun",
+    "Hj Shahrani Hj Abdullah & Hjh Zaleha Abdul Rahman",
+    "Hjh Mariah Hj Abdullah & Hj Abd Rahman",
+    "Hj Zaid Hj Abdullah & Hjh Zaidah Mohd Salleh",
+    "Hjh Zalina Hj Abdullah & Hj Muharam Abdul Latib",
+  ],
+  "Hj Elias Bin Jamil & Hjh Zabedah Ibrahim": [
+    "Hj Ismail Hj Elias",
+    "Hjh Rogayah Hj Elias",
+    "Hj SalmanFarsi Hj Elias",
+    "Hjh Salmiah Hj Elias",
+    "Hj Ahmad Ziyad Hj Elias",
+    "Hjh Umi Kalsom Hj Elias",
+    "Hj Ahmad Shukri Hj Elias",
+    "Hjh Azmiyah Hj Elias",
+    "Hjh Nadiyah Hj Elias",
+  ],
+  "Hj Harun Bin Pakeh & Hjh Noriah Binti Mat Shah": [
+    "Hj Ramli Hj Harun & Hjh Halimah Bt Hj Harun",
+    "Hj Sharifuddin Hj Harun & Siti Khatijah Abd Kadir",
+    "Hjh Jumaiyah Hj Harun & Abd Mutalib Bin Ab Hamid",
+    "Hjh Raudhiah Hj Harun & Hj Kamarul Zaman Bin Khalid",
+    "Hjh Raha Hj Harun & Hj Amir Hamzah Bin Sentat",
+  ],
+  "Hj Othman Bin Fakeh & Hjh Habsah Daud": [
+    "Hj Kamaruddin Hj Othman & Rokiah Abd Rani",
+    "Hj Mohd Ali Hj Othman & Norhayati Bt Ross",
+  ],
+};
+
+// Gen 4 keyed by Gen 3
+const gen4Map = {
+  // Fatimah → Hjh Zaleha
+  "Hjh Zaleha Rahman & Hj Shahrani Abdullah": [
+    "Shazali Shahrani & Siti Juhana Jamian",
+    "Shazlina Shahrani",
+    "Siti Latifah Shahrani & Jumali Selamat",
+    "Shafiz Shahrani & Rogayah Muharram",
+    "Siti Shafizah Shahrani & Amiruddin Hussin",
+    "Siti Shazirah Shahrani & Mohd Ritzman Abdul Karim",
+    "Shazizan Shahrani",
+    "Shazamin Shahrani",
+    "Siti Shazwani Shahrani",
+  ],
+  // Hj Amiruddin → Hjh Azizah
+  "Hjh Azizah Hj Amiruddin & Wan Mohamed Azian Bin Wan Ramlan": [
+    "Wan Nor Azila Binti Wan Mohamed Azian & Muhamad Razib Bin Mohsin",
+    "Wan Mohd Fauzi Bin Wan Mohamed Azian",
+    "Wan Nor Harfizah Binti Wan & Mohd Faizal Bin Ismail",
+    "Wan Nur Hidayah Binti Wan Mohamed Azian & Azuan Bin Mohd Zaman",
+    "Wan Nurfara Syahida Binti Wan Mohamed Azian & Khairul Hareez Bin Mohd Halim",
+    "Wan Nur Sakinah Binti Wan Mohamed Azian & Muhamad Afeeq Bin Adnan",
+    "Wan Mohamad Zahid Bin Wan Mohamed Azian & Nur Shahirah Binti Mohd Nazir",
+  ],
+  // Al-Faqeh → Hj Mohd Nor
+  "Hj Mohd Nor Hj Abdullah & Hjh Noraini": [
+    "Mohd Fauzi Mohd Nor & Ani Hayati Sulaiman",
+    "Ahmad Fuad Mohd Nor & Noor Shahima Mohd Zain",
+    "Ahmad Firdaus Mohd Nor & Siti Khadijah Diaudin",
+    "Anis Faridah Mohd Nor & Muhammad Yusoff Satoshi Yakata",
+    "Ana Faiza Mohd Nor & Ainan B. Rijan",
+    "Amilia Fairuz Mohd Nor & Farid Abu Bakar",
+    "Ainul Fathiyah Mohd Nor & Nazrali Bin Sapuan",
+    "Ainul Fauzah Mohd Nor & Ibrahim Bin Katderi",
+  ],
+  // Al-Faqeh → Hj Mohammad Kassim
+  "Hj Mohammad Kassim Hj Abdullah & Hjh Sawiah Hj Sutan": [
+    "Rohana Mohammad Kassim & Baharuddin Ahmad",
+    "Abd Rajak Mohammad Kassim",
+    "Abdul Rahman Mohammad Kassim & Janatun Nangim Muhamad Saleh",
+    "Rohani Mohammad Kassim & Mohd Nasir Abdullah",
+    "Khamisah Mohammad Kassim & Mohd Zul Zahri Bin Zainudin",
+    "Abdul Rahim Mohammad Kassim & Noor Fazlina Abd Rahim",
+    "Rasyidah Mohammad Kassim & Muhammad Faiz Jamadi",
+  ],
+  // Al-Faqeh → Hj Ahmad Rafai
+  "Hj Ahmad Rafai Hj Abdullah & Hjh Kamariah Abd Ghani": [
+    "Ahmad Zafri Ahmad Rafai & Nur Sa'adah Mohd Ramly",
+    "Ahmad Zuhdi Ahmad Rafai & Norulaini Ahmad Harnaini",
+    "Ahmad Zikri Ahmad Rafai & Norfarhana Mohd Noor",
+    "Ahmad Zaidi Ahmad Rafai & Nor Syazwani Razali",
+    "Ahmad Zulfadhli Ahmad Rafai & Sumaiyah Abdul Ghaffar",
+    "Amna Zahida Ahmad Rafai & Muhammad Elrashid Yousif Mohamed",
+  ],
+  // Al-Faqeh → Hj Mahmud
+  "Hj Mahmud Hj Abdullah & Hjh Shahirul Azian Mohamed Amin": [
+    "Suhaimi Mahmud & Rogayah Hashim",
+    "Suhaila Mahmud & Izhar Tahir",
+    "Abdullah Amin Mahmud & Zainab Sa'adun",
+  ],
+  // Al-Faqeh → Hj Diaudin
+  "Hj Diaudin@Yaudin Hj Abdullah & Hjh Masiah Bt Sidek": [
+    "Ahmad Bukhari Diaudin & Noraidah Bt Suman",
+    "Masitah Diaudin & Mohd Nazri Hasan",
+    "Mohd Ismail Diaudin",
+    "Mohd Shukri Diaudin & Nor Faiza",
+    "Mohd Radzi Diaudin & Sulinda Daud",
+    "Siti Khadijah Diaudin & Ahmad Firdaus Mohd Nor",
+    "Siti Fatimah Diaudin & Abd Razak Ismail",
+    "Siti Rahimah Diaudin & Wan Saifol Bakri Wan Mi",
+    "Siti Saudah Diaudin & Mohd Khairani Mohd Khalif",
+    "Siti Aishah Diaudin & Mohd Razif",
+    "Siti Aminah Diaudin",
+    "Siti Hajar Diaudin & Shahrul Ridhwan A. Ali",
+    "Siti Halimatul Saadiah Diaudin & Khirol Azuan Jaafar",
+    "Muhammad Yaakub Diaudin",
+  ],
+  // Al-Faqeh → Hjh Hendon
+  "Hjh Hendon Hj Abdullah & Hj Mohamad Hj Hashim": [
+    "Adibah Mohamad & Mohd Rizal Shamsudin",
+    "Arfah Zakiah Mohamad & Mohammad Rafi Abdul Rashid",
+    "Ahmad Ghazali Mohamad & Rozita Zabidi",
+    "Abdullah Faiz Mohamad & Huzaimah Ahmad",
+    "Aishatur Rashidah Mohamad & Hasnur Izwan Hassan Basri",
+  ],
+  // Al-Faqeh → Hjh Zainab
+  "Hjh Zainab Hj Abdullah & Hj Abdul Halim Harun": [
+    "Ahmad Hafiz Abd Halim & Norazlin Ma'arof",
+    "Azzah Haniza Abd Halim & Muis Alimin Mohd Yusof",
+    "Ahmad Nizam Abd Halim & Ermie Faharina Ismail",
+    "Ahmad Khairul Fahmi Abd Halim & Julia Mohd Jobil",
+    "Amanatuzzakiah Abd Halim & Mohd Firdaus Abd Wahab",
+    "Aliyatulhimmah Abd Halim",
+    "Ahmad Khairul Anwar Abd Halim & Nadiana binti Mohd Ismail",
+    "Anis Farhana Abd Halim & Long Zulkarnaen Long Zainudin",
+  ],
+  // Al-Faqeh → Hj Shahrani
+  "Hj Shahrani Hj Abdullah & Hjh Zaleha Abdul Rahman": [
+    "Shazali Shahrani & Siti Juhana Jamian",
+    "Shazlina Shahrani",
+    "Siti Latifah Shahrani & Jumali Selamat",
+    "Shafiz Shahrani & Rogayah Muharram",
+    "Siti Shafizah Shahrani & Amiruddin Hussin",
+    "Siti Shazirah Shahrani & Mohd Ritzman Abdul Karim",
+    "Shazizan Shahrani & Siti Norkhairunnnisa By Azizi",
+    "Shazamin Shahrani",
+    "Siti Shazwani Shahrani",
+  ],
+  // Al-Faqeh → Hjh Mariah
+  "Hjh Mariah Hj Abdullah & Hj Abd Rahman": [
+    "Muhammad Hanafi Abd Rahman & Yusniza Yunos",
+    "Ahmad Shahir Abd Rahman",
+    "Abu Suffian Abd Rahman & Azwina Mohd Azman",
+    "Huzaifah Abd Rahman",
+    "Ahmad Turmudzi Abd Rahman & Intan Mastura",
+    "Lukman Hakim Abd Rahman & Nadirah Kushan",
+    "Siti Fatimah Abd Rahman & Wan Mohd Noorhafeez Wan Sa'ari",
+    "Abd Salam Abd Rahman & Siti Nabilah Binti Abdullah",
+    "Nuraishah Abd Rahman",
+    "Hamizah Abd Rahman & Muhammad Nazreen Faiz bin Nordin",
+  ],
+  // Al-Faqeh → Hj Zaid
+  "Hj Zaid Hj Abdullah & Hjh Zaidah Mohd Salleh": [
+    "Zainab Zaid & Nurrul Ariffen Omar",
+    "Zainah Zaid & Mohd Zaidy Abd Rahman",
+    "Usamah Zaid & Nurhayati Jumadi",
+    "Fatimah Zaid & Ahmad Ibrahim Ahmad Zaidi",
+    "Abu Ubaidah Zaid & Intan",
+    "Muhammad Abdullah Zaid & Nurul Jannah Abdul Razak",
+    "Nurussyahidah Zaid & Abd Afiq Hamdan",
+    "Nurul Nadzirah Zaid & Abdullah Omar",
+  ],
+  // Al-Faqeh → Hjh Zalina
+  "Hjh Zalina Hj Abdullah & Hj Muharam Abdul Latib": [
+    "Muhammad Idris Muharam & Wan Nabeela Wan Mustapha",
+    "Rogayah Muharam & Shafiz Shahrani",
+    "Ahmad Lutfi Muharam & Khadijah Shahardin",
+    "Ummi Kalthum Muharam & Mohd Ismee Ismail",
+    "Siti Hajar Muharam & Effendi Ibrahim",
+    "Mohd Isa Muharam",
+    "Muhammad Yunus Muharam & Yusni Najwa Idris",
+    "Mohd Omar Muharam & Noor Hafiza bt Mastor Rahman",
+    "Mohd Noh Muharam & Nurul Syahirah Binti Ahmad Idris",
+  ],
+  // Hj Harun → Hj Ramli
+  "Hj Ramli Hj Harun & Hjh Halimah Bt Hj Harun": [
+    "Hasan Maulid Hj Ramli & Noralina Mohd Saad",
+    "Abdul Fattah Hj Ramli & Nor Surizan Md Yusuf",
+    "Nurul Ashiqin Hj Ramli & Mohd Azmi",
+    "Mohd Assha'ari Hj Ramli",
+    "Nursaadah Hj Ramli & Azerul Tomichan",
+    "Husin Maulud Hj Ramli & Norhaslina Hashim",
+    "Nur Hafizah Hj Ramli & Mohammad Ezwan Aplus",
+  ],
+  // Hj Harun → Hj Sharifuddin
+  "Hj Sharifuddin Hj Harun & Siti Khatijah Abd Kadir": [
+    "Muhd Zulkifli Hj Sharifuddin & Noor Kasmil Nazura",
+    "Sulaiman Hj Sharifuddin & Rina Shanti Kartika Zulkarnen",
+    "Muhd Hafiz Hj Sharifuddin & Suhana Abd Hamid",
+    "Muhammad Zulkarnain Hj Sharifuddin",
+    "Siti Farhaini Hj Sharifuddin & Muzafil Huzairin Mukmin",
+  ],
+  // Hj Harun → Hjh Jumaiyah
+  "Hjh Jumaiyah Hj Harun & Abd Mutalib Bin Ab Hamid": [
+    "Abd Ghani Ramadan Abd Mutalib & Nurlailatul Qamar Zulkiffle",
+    "Ahmad Fitri Abd Mutalib & Nuruljanna Othman",
+    "Mohamad Aliff Abd Mutalib",
+    "Zawawi Abd Mutalib",
+    "Nur Raihan Abd Mutalib",
+    "Syakirah Abd Mutalib",
+    "Kamaliah Abd Mutalib",
+  ],
+  // Hj Harun → Hjh Raudhiah
+  "Hjh Raudhiah Hj Harun & Hj Kamarul Zaman Bin Khalid": [
+    "Mohd Jamil Subhi Hj Kamarul Zaman & Sofieyatul Akmar Ismail",
+    "Muhd Abbas Hj Kamarul Zaman",
+    "Norwada Hj Kamarul Zaman",
+    "Ahmad Sufian Hj Kamarul Zaman",
+    "Ahmad Razidan Hj Kamarul Zaman",
+    "Noraina Mardiah Hj Kamarul Zaman",
+    "Norshuhaila Hj Kamarul Zaman",
+    "Nornabilah Husna Hj Kamarul Zaman",
+    "Normira Sakinah Hj Kamarul Zaman",
+    "Mohd Azim Hj Kamarul Zaman",
+    "Kamarul Hisham Hj Kamarul Zaman",
+    "Mohd Hafiz Hj Kamarul Zaman",
+    "Norhidayah Hj Kamarul Zaman",
+  ],
+  // Hj Harun → Hjh Raha
+  "Hjh Raha Hj Harun & Hj Amir Hamzah Bin Sentat": [
+    "Amir Ariff Hj Amir",
+    "Amir Mursyid Hj Amir",
+    "Anis Maisarah Hj Amir",
+    "Nur Huwaina Hj Amir",
+    "Amir Aqli Hj Amir",
+  ],
+  // Hj Othman → Hj Kamaruddin
+  "Hj Kamaruddin Hj Othman & Rokiah Abd Rani": [
+    "Sabarina Akmal Hj Kamaruddin & Saiful Edi",
+    "Mohd Adeeb Hj Kamaruddin & Siti Nurfazilah",
+    "Anuar Hj Kamaruddin",
+    "Firdaus Hj Kamaruddin & Nurbaizura",
+    "Jamaludin Hj Kamaruddin & Nurul Jannah",
+  ],
+  // Hj Othman → Hj Mohd Ali
+  "Hj Mohd Ali Hj Othman & Norhayati Bt Ross": [
+    "Saiful Irwan Hj Mohd Ali & Tengku Suzilawati",
+    "Syamsul Amri Hj Mohd Ali & Shaidatul Akmar",
+  ],
+};
+
+// ── PROGRESS BAR ─────────────────────────────────────────────────────────────
+const stepLabels = ["Maklumat\nAsas & Peribadi","Keturunan","Pendidikan\n& Kerjaya","Pengesahan"];
+let currentStep = 1;
+const totalSteps = 4;
+
+function buildProgress(){
+  const bar = document.getElementById("progressBar");
+  bar.innerHTML = "";
+  for(let i=1;i<=totalSteps;i++){
+    const node = document.createElement("div");
+    node.className = "step-node";
+
+    const circle = document.createElement("div");
+    circle.className = "step-circle" + (i < currentStep ? " done" : i === currentStep ? " active" : "");
+    circle.textContent = i < currentStep ? "✓" : i;
+    node.appendChild(circle);
+
+    const lbl = document.createElement("div");
+    lbl.className = "step-label" + (i === currentStep ? " active" : "");
+    lbl.textContent = stepLabels[i-1];
+    node.appendChild(lbl);
+    bar.appendChild(node);
+
+    if(i < totalSteps){
+      const line = document.createElement("div");
+      line.className = "step-line" + (i < currentStep ? " done" : "");
+      bar.appendChild(line);
+    }
+  }
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function goTo(n){
+  if(n > currentStep && !validateStep(currentStep)) return;
+  document.getElementById("step"+currentStep).classList.remove("active");
+  currentStep = n;
+  document.getElementById("step"+currentStep).classList.add("active");
+  buildProgress();
+  if(n === 4) buildSummary();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function validateStep(s){
+  const card = document.getElementById("step"+s);
+  const required = card.querySelectorAll("[required]");
+  let ok = true;
+  required.forEach(el => {
+    el.classList.remove("error");
+    if(el.type === "checkbox"){
+      if(!el.checked){ el.closest(".check-label").style.color="var(--er)"; ok=false; }
+      else el.closest(".check-label").style.color="";
+    } else {
+      if(!el.value.trim()){ el.classList.add("error"); ok=false; }
+    }
+  });
+  return ok;
+}
+
+// ── AGE CALC ──────────────────────────────────────────────────────────────────
+document.getElementById("tarikh_lahir").addEventListener("change", function(){
+  const dob = new Date(this.value);
+  const disp = document.getElementById("umur_display");
+  if(!this.value || isNaN(dob)){disp.textContent="— tarikh tidak sah —"; return;}
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  const m = today.getMonth() - dob.getMonth();
+  if(m < 0 || (m===0 && today.getDate() < dob.getDate())) age--;
+  disp.textContent = age + " tahun";
+});
+
+
+// Gen 5 keyed by Gen 4
+const gen5Map = {
+  // ── Hj Nawi → Hjh Zaleha → Shazali ──
+  "Shazali Shahrani & Siti Juhana Jamian": ["Saiful Afif Sufi Shazali","Azaan Alfaqeh Shazali","Shaza Afifah Shazali"],
+  "Siti Latifah Shahrani & Jumali Selamat": ["Siti Ummi Kalthum Jumali","Abdul Maalim Shah Jumali","Siti Hijratul Soffia Jumali","Siti Nurainaa Malyanah Jumali","Siti Qurratu Aini Jumali","Aiti Amrinaa Rashada Jumali"],
+  "Shafiz Shahrani & Rogayah Muharram": ["Siti Shazimah Shafiz","Shaziman Shahrani Shafiz","Shafizan Shahrani Shafiz","Shamil Shahrani Shafiz"],
+  "Siti Shafizah Shahrani & Amiruddin Hussin": ["Aaish Amaar Amiruddin"],
+  "Siti Shazirah Shahrani & Mohd Ritzman Abdul Karim": ["Siti Raisha Umaira Mohd Ritzman"],
+
+  // ── Hj Nawi → Hj Amiruddin → Mohd Amran ──
+  "Mohd Amran Hj Amiruddin & Nafisah Zakaria": ["Fatin Shuhada Mohd Amran","Muhammad Ameer Nasrullah bin Hj Izani"],
+  // ── Hj Nawi → Hj Amiruddin → Hjh Azizah ──
+  "Wan Nor Azila Binti Wan Mohamed Azian & Muhamad Razib Bin Mohsin": ["Nur Irdina Batrisya Bt Abd Muizz","Muhammad Adam Zikri Bin Muhamad Razib"],
+  "Wan Nor Harfizah Binti Wan & Mohd Faizal Bin Ismail": ["Amna Safiyah Binti Mohd Faizal"],
+  "Wan Nur Hidayah Binti Wan Mohamed Azian & Azuan Bin Mohd Zaman": ["Muhammad Harris Bin Azuan","Hanna Umaira Binti Azuan","Muhammad Harraz Bin Azuan","Hani Sofea Binti Azuan"],
+  "Wan Nurfara Syahida Binti Wan Mohamed Azian & Khairul Hareez Bin Mohd Halim": ["Muhammad Ilman Hakimi Bin Khairul Hareez"],
+  "Wan Nur Sakinah Binti Wan Mohamed Azian & Muhamad Afeeq Bin Adnan": ["Rania Maisarah Binti Muhamad Afeeq","Raisa Medina Binti Muhamad Afeeq"],
+  "Wan Mohamad Zahid Bin Wan Mohamed Azian & Nur Shahirah Binti Mohd Nazir": ["Wan Nur Inara Saffiyah Binti Wan Mohamad Zahid","Wan Mohamad Fayyadh Zareef Bin Wan Mohamad Zahid"],
+  // ── Hj Nawi → Hj Amiruddin → Hj Asaari ──
+  "Hj Asaari Hj Amiruddin & Hjh Zubaini Zakaria": ["AmirZaki bin Hj Asaari","Zulaikha bt Hj Asaari","Anis Yasmin bt Hj Asaari & Remol Mohammad","AmirArief bin Hj Asaari"],
+  // ── Hj Nawi → Hj Amiruddin → Abd Halim ──
+  "Abd Halim Hj Amiruddin & Salmah Bte Hj Abdullah": ["Ezzah Khairiyah Bte Abdul Halim","Nadzirul Helmi Bin Abdul Halim","Kamil Fahmi Bin Abdul Halim & NurFakhira Bte Hussin","Arinah Adila Bte Abdul Halim","Muhammad Ikmal Afifi Bin Abdul Halim"],
+  // ── Hj Nawi → Hj Amiruddin → Saleha ──
+  "Saleha Hj Amiruddin & Mohd Faizal Mohd Nor": ["Nur Fakhrulrazzi Mohd Faizal","Nuralia Zaheera Mohd Faizal"],
+  // ── Hj Nawi → Hj Amiruddin → Noor Azah ──
+  "Noor Azah Hj Amiruddin & Hj Roslan B Hj Dabal": ["Syed Amir Zakir B Syed Azizi","Sharifah NurAisyah Bt Syed Azizi","Syed Aqil Luqman B Syed Azizi","Muhammad Iman Danish B Hj Roslan"],
+
+  // ── Al-Faqeh → Hj Mohd Nor → Mohd Fauzi ──
+  "Mohd Fauzi Mohd Nor & Ani Hayati Sulaiman": ["Ainul Farha Bt Mohd Fauzi & Mohd Fakhrullah Bin Mokmin","Alia Farhana Mohd Fauzi & Afiiq Nasir B Jamal Abdul Nasir","Aqilah Fatin Mohd Fauzi & Qaiyum bin Kamarul Bahrin","Muhammad Luqman Mohd Fauzi"],
+  "Ahmad Fuad Mohd Nor & Noor Shahima Mohd Zain": ["Ahmad Nabil Ahmad Fuad","Noor Shahira Diyana Ahmad Fuad","Noor Shafiqah Liyana Ahmad Fuad","Noor Shafiah Hannah Ahmad Fuad","Noor Shafinaz Afiqah Ahmad Fuad","Noor Sofia Arissa Ahmad Fuad"],
+  "Ahmad Firdaus Mohd Nor & Siti Khadijah Diaudin": ["Inamul Hasan Ahmad Firdaus & Tuan Atiyah Maisarah Bt Tuan Kechik","Muhammad Yusuf Furqan Ahmad Firdaus & Khairunnabila Bt Kamaruddin","Muhammad Ilyas Bin Ahmad Firdaus","Muhammad Ilyasa' Bin Ahmad Firdaus","Nur Ayeesha Sofea Bt Ahmad Firdaus"],
+  "Anis Faridah Mohd Nor & Muhammad Yusoff Satoshi Yakata": ["Muhammad Zahid Burhanuddin & Nur Syahirah Bt Amiruddin","Muhammad Aizad Burhanuddin"],
+  "Ana Faiza Mohd Nor & Ainan B. Rijan": ["Ain Adilah Ainan & Muhammad Imran Azim B. Azman","Ayesha Asilah Ainan & Zyubair Hirriq Bin Majid","Muhammad Anas Ainan & Nur Syahirah Bt Mohamad Ariff","Afeefa Ainan","Ateeqa Ainan"],
+  "Amilia Fairuz Mohd Nor & Farid Abu Bakar": ["Farah Athira Farid & Lokman Hakim Bin Bakar","Farah Atiqah Farid","Muhammad Irfan Farid","Farah Amira Farid","Muhammad Danish Iman Farid","Farah Afrina Liyana Farid","Muhammad Firas Aryan Farid"],
+  "Ainul Fathiyah Mohd Nor & Nazrali Bin Sapuan": ["Ammar Naufal Nazrali","Alyssa Nusrah Nazrali","Adam Nuqman Nazrali","Aisy Nisrina Bt Nazrali"],
+  "Ainul Fauzah Mohd Nor & Ibrahim Bin Katderi": ["Ahmad Ammer Harith Ibrahim & Puteri Rannia Aisya Bt Mohd Rithaudeen","Ahmad Aqeef Haziq Ibrahim"],
+
+  // ── Al-Faqeh → Hj Mohammad Kassim ──
+  "Rohana Mohammad Kassim & Baharuddin Ahmad": ["Nor Farhana Baharuddin","Ahmad Helmi Baharuddin","Nur Alifah Baharuddin","Ahmad Hafizi Baharuddin","Nur Najihah Baharuddin","Nur Aliyah Baharuddin","Ahmad Husni Baharuddin"],
+  "Abd Rajak Mohammad Kassim": ["Ahmad Safwan Fahmi Abd Rajak"],
+  "Abdul Rahman Mohammad Kassim & Janatun Nangim Muhamad Saleh": ["Mohd Arif Abdul Rahman","Mohd Abdullah Abdul Rahman","Mohd Habibullah Abdul Rahman","Mohd Fakhrullah Abdul Rahman","Ain Nur Raudhah Abdul Rahman"],
+  "Rohani Mohammad Kassim & Mohd Nasir Abdullah": ["Wan Muhammad Syaful Amin Mohd Nasir","Wan Muhamad Shafiq Putra Mohd Nasir","Wan Muhamad Hafizuddeen Shah Mohd Nasir","Wan Anis Sumaiyah Mohd Nasir"],
+  "Khamisah Mohammad Kassim & Mohd Zul Zahri Bin Zainudin": ["Mohammad Firdaus Bin Mohd Zul Zahri & Nur Nadirah Aqilah","Nurul Atikah Binti Mohd Zul Zahri","Mohammad Adam Bin Mohd Zul Zahri","Nursyuhadah Binti Mohd Zul Zahri"],
+  "Abdul Rahim Mohammad Kassim & Noor Fazlina Abd Rahim": ["Nurbatrisya Natasha Abdul Rahim"],
+  "Rasyidah Mohammad Kassim & Muhammad Faiz Jamadi": ["Muhammad Rifqi bin Muhammad Faiz","Nur Rifdah Filzah binti Muhammad Faiz","Muhammad Rifaei bin Muhammad Faiz"],
+
+  // ── Al-Faqeh → Hj Ahmad Rafai ──
+  "Ahmad Zafri Ahmad Rafai & Nur Sa'adah Mohd Ramly": ["Ahmad Zakaria Ahmad Zafri","Asma' Zulaikha Ahmad Zafri","A'isyah Zakiah Ahmad Zafri","Ahmad Zulkarnain Ahmad Zafri","Ahmad Zulkifli Ahmad Zafri"],
+  "Ahmad Zuhdi Ahmad Rafai & Norulaini Ahmad Harnaini": ["Ahmad Zulfikri Ahmad Zuhdi","Ahmad Zafran Alfaqeh Ahmad Zuhdi"],
+  "Ahmad Zikri Ahmad Rafai & Norfarhana Mohd Noor": ["Ahmad Ziyad Alfaqeh Ahmad Zikri","Ahmad Zaim Alfaqeh Ahmad Zikri","Awatif Zuhaira Alfaqeh Ahmad Zikri"],
+  "Ahmad Zaidi Ahmad Rafai & Nor Syazwani Razali": ["Ahmad Abbas Ahmad Zaidi"],
+  "Ahmad Zulfadhli Ahmad Rafai & Sumaiyah Abdul Ghaffar": ["Ahmad Zabidi Ahmad Zulfadhli","Alia Zahrah Ahmad Zulfadhli","Ahmad Zaid Ahmad Zulfadhli"],
+  "Amna Zahida Ahmad Rafai & Muhammad Elrashid Yousif Mohamed": ["Awwab Muhammad Elrashid Yousif"],
+
+  // ── Al-Faqeh → Hj Mahmud ──
+  "Suhaimi Mahmud & Rogayah Hashim": ["Muhd Ammar Syahmi Suhaimi","Nuraisyah Raihanah Suhaimi","Muhd Akif Syahmi Suhaimi","Nuraina Raihanah Suhaimi"],
+  "Suhaila Mahmud & Izhar Tahir": ["Hazim Izhar","Hariz Izhar"],
+  "Abdullah Amin Mahmud & Zainab Sa'adun": ["Shahrul Madinah Mahmud"],
+
+  // ── Al-Faqeh → Hj Diaudin ──
+  "Ahmad Bukhari Diaudin & Noraidah Bt Suman": ["Mohd Alif Ahmad Bukhari","Mohd Arief Danial Ahmad Bukhari"],
+  "Masitah Diaudin & Mohd Nazri Hasan": ["Akmal Nizam","Akmal Amirul","Mas Amirah"],
+  "Mohd Radzi Diaudin & Sulinda Daud": ["Alya Althafunnisa","Muhammad Nuh Alsagoff Mohd Radzi","Damia Hannah Mohd Radzi"],
+  "Siti Fatimah Diaudin & Abd Razak Ismail": ["Muhammad Hafiz Abd Razak","Alissa Nabiha","Arisha Nadiha"],
+  "Siti Rahimah Diaudin & Wan Saifol Bakri Wan Mi": ["Muhammad Hadif Insani","Norzahiratul Nafisah","Wan Zairatul Najwa W. Saifol Bakri","Wan Zulaikha Husna W. Saifol Bakri"],
+  "Siti Saudah Diaudin & Mohd Khairani Mohd Khalif": ["Aira Shafiqah Mohd Khairani","Adriana Syafiqah Mohd Khairani","Ahmad Shafiq Mohd Khairani"],
+  "Siti Hajar Diaudin & Shahrul Ridhwan A. Ali": ["Humaira Shahrul","Husna Shahrul"],
+  "Siti Halimatul Saadiah Diaudin & Khirol Azuan Jaafar": ["Mohd Harith Mirza Khirol"],
+
+  // ── Al-Faqeh → Hjh Hendon ──
+  "Adibah Mohamad & Mohd Rizal Shamsudin": ["Arif Hakim","Adib Hakim","Afiqah Haifa","Amira Haifa"],
+  "Arfah Zakiah Mohamad & Mohammad Rafi Abdul Rashid": ["Muhamad Aiman Faris Mohammad Rafi"],
+  "Ahmad Ghazali Mohamad & Rozita Zabidi": ["Ahmad Imran Ahmad Ghazali","Amir Asyraf Ahmad Ghazali","Nur thurayya Ahmad Ghazali","Nur Dalillah Ahmad Ghazali","Nur Sarah Sufiyyah Ahmad Shazali","Ahmad Ammar Luqman Ahmad Ghazali","Nur Zahra Ahmad Ghazali"],
+  "Abdullah Faiz Mohamad & Huzaimah Ahmad": ["Nur Afrina Husna Abdullah Faiz","Nur Amanina Najihah Abdullah Faiz","Anees Sofeyya Abdullah Faiz","Firas Abdullah Faiz"],
+  "Aishatur Rashidah Mohamad & Hasnur Izwan Hassan Basri": ["Akmal Hakimi Hasnur Izwan","Ainin Nur Hana Hasnur Izwan","Amsyar Harith Hasnur Izwan","Ashraf Hussaini Hasnur Izwan"],
+
+  // ── Al-Faqeh → Hjh Zainab (Ahmad Hafiz) ──
+  "Ahmad Hafiz Abd Halim & Norazlin Ma'arof": [],
+  "Azzah Haniza Abd Halim & Muis Alimin Mohd Yusof": [],
+  "Ahmad Nizam Abd Halim & Ermie Faharina Ismail": [],
+  "Ahmad Khairul Fahmi Abd Halim & Julia Mohd Jobil": [],
+  "Amanatuzzakiah Abd Halim & Mohd Firdaus Abd Wahab": [],
+  "Ahmad Khairul Anwar Abd Halim & Nadiana binti Mohd Ismail": [],
+  "Anis Farhana Abd Halim & Long Zulkarnaen Long Zainudin": [],
+
+  // ── Al-Faqeh → Hjh Mariah ──
+  "Muhammad Hanafi Abd Rahman & Yusniza Yunos": [],
+  "Abu Suffian Abd Rahman & Azwina Mohd Azman": [],
+  "Ahmad Turmudzi Abd Rahman & Intan Mastura": [],
+  "Lukman Hakim Abd Rahman & Nadirah Kushan": ["Muhammad Aydan Zafran Lukman Hakim","Muhammad Asyraff Ziqry Lukman Hakim"],
+  "Siti Fatimah Abd Rahman & Wan Mohd Noorhafeez Wan Sa'ari": ["Wan Nur Fatini Wan Mohd Noorhafeez","Wan Muhammad Syahmi Wan Mohd Noorhafeez"],
+  "Abd Salam Abd Rahman & Siti Nabilah Binti Abdullah": ["Aleesa Sofia Bt Abdul Salam"],
+  "Hamizah Abd Rahman & Muhammad Nazreen Faiz bin Nordin": ["Muhammad aish harraz Muhammad Nazreen","Nur mardhiyah abadah Muhammad Nazreen"],
+
+  // ── Al-Faqeh → Hj Zaid ──
+  "Zainab Zaid & Nurrul Ariffen Omar": ["Muhammad Zainul Ariffin binti Nurrul Arrifen","Ainul Mardhiah binti Nurrul Arrifen","Arifah Munirah binti Nurrul Arrifen","Arifah Maisarah binti Nurrul Arrifen"],
+  "Zainah Zaid & Mohd Zaidy Abd Rahman": ["Maryam Zahraa Mohd Zaidy"],
+  "Usamah Zaid & Nurhayati Jumadi": ["Nur Qurratuain Usamah","Nur Sarah Naelah Usamah","Nur hanna Athufah Usamah","Muhammad Aamir AlFakeh Usamah","Nur Insyirah AlFakeh Usamah","Muhammad Ammar Al Fakeh Usamah","Muhammad Aiman Al Fakeh Usamah","Nur Rayhanah Al Fakeh Usamah"],
+  "Fatimah Zaid & Ahmad Ibrahim Ahmad Zaidi": ["Alia Imani Ahmad Ibrahim","Ahmad Ilham Ahmad Ibrahim","Ahmad Ikhwan Ahmad Ibrahim","Alia Irdina Alfaqeh Ahmad Ibrahim","Ahmad Ismail Alfaqeh Ahmad Ibrahim"],
+  "Abu Ubaidah Zaid & Intan": ["Ahmad Abu Hurairah Mikail Abu Ubaidah","Alesyah Syafinaz Abu Ubaidah","Ahmad Abu Said Qudri Abu Ubaidah","Dhia Maisarah Abu Ubaidah"],
+  "Muhammad Abdullah Zaid & Nurul Jannah Abdul Razak": ["Muhammad Aqeel Muhammad Abdullah","Aisyah Solehah Muhammad Abdullah","Muhammad Mubarak Alfaqeh Muhammad Abdullah","Khawlah Alfaqeh Muhammad Abdullah"],
+  "Nurussyahidah Zaid & Abd Afiq Hamdan": ["Muhammad Zaid Abd Afiq","Muhammad Zubair Abd Afiq","Nur Zulaikha Abd Afiq","Nur Zakiyya Abd Afiq","Nur Zaida Abd Afiq","Nur Zayna Abd Afiq"],
+  "Nurul Nadzirah Zaid & Abdullah Omar": ["Ayesha Khadeeja binti Abdullah","Omar Zaid bin Abdullah","Ahmad Zayn bin Abdullah"],
+
+  // ── Al-Faqeh → Hjh Zalina ──
+  "Muhammad Idris Muharam & Wan Nabeela Wan Mustapha": ["Muhammad Muhammad Idris","Abdul Rahman Muhammad Idris","Abdul Fattah Muhammad Idris","Aisyah Humaira Muhammad Idris","Ahmad Muienuddin Muhammad Idris","Nu'man Taufiq Muhammad Idris","Amirul Hadi Muhammad Idris"],
+  "Rogayah Muharam & Shafiz Shahrani": ["Siti Shazimah binti Shafiz","Shaziman Shahrani binti Shafiz","Shafizan Shahrani binti Shafiz","Shamil Shahrani binti Shafiz","Shakib Shahrani binti Shafiz","Shakir Shahrani binti Shafiz"],
+  "Ahmad Lutfi Muharam & Khadijah Shahardin": ["Ahmad Faqeh Ahmad Lutfi","Aleeyah Maisarah Ahmad Lutfi","Athirah Solehah Ahmad Lutfi","Ahmad Fahim Ahmad Lutfi","Awfa Safiyyah Ahmad Lutfi","Asma az zahrah Ahmad Lutfi","Afiyah Nafisah Ahmad Lutfi"],
+  "Ummi Kalthum Muharam & Mohd Ismee Ismail": ["Nur Afiqah Aina Mohd Ismee","Muhammad Ilham Mohd Ismee","Muhammad Atif Bin Mohd Ismee"],
+  "Siti Hajar Muharam & Effendi Ibrahim": ["Muhammad Ilyas bin Effendi","Muhammad Yusuf bin Effendi","Tasneem binti Effendi","Muhammad Musa bin Effendi","Muhammad Ibrahim bin Effendi","Muhammad Alwi bin Effendi"],
+  "Muhammad Yunus Muharam & Yusni Najwa Idris": ["Nur Shajar Inara Binti Muhammad Yunus"],
+  "Mohd Omar Muharam & Noor Hafiza bt Mastor Rahman": ["Muhammad Adam Rayyan bin Muhammad Umar","Muhammad Aryan Raees bin Muhammad Umar"],
+  "Mohd Noh Muharam & Nurul Syahirah Binti Ahmad Idris": ["Muhammad Raeef bin Muhammad Noh","Muhammad Razin bin Muhammad Noh"],
+
+  // ── Al-Faqeh → Hj Harun → Hj Ramli ──
+  "Hasan Maulid Hj Ramli & Noralina Mohd Saad": ["Fatin Nurhazwin Hasan","Hazwan Hakimi Hasan"],
+  "Abdul Fattah Hj Ramli & Nor Surizan Md Yusuf": ["Muhammad Aiman Abdul Fattah","Muhammad Daris Abdul Fattah","Nur Damia Aleesya Abdul Fattah"],
+  "Nurul Ashiqin Hj Ramli & Mohd Azmi": ["Mohd Yusof Mohd Assha'ari"],
+  "Nursaadah Hj Ramli & Azerul Tomichan": ["Mohamad Farhan Nashrullah Bin Azerul","Nurfarhana Atikah Bt Azerul","Nurhuwaida Insyirah Bt Azerul"],
+  "Husin Maulud Hj Ramli & Norhaslina Hashim": ["Aisyah Humaira Husin Maulud","Fatimah Az-Zahra Husin Maulud","Muhammad Qayyum"],
+  "Nur Hafizah Hj Ramli & Mohammad Ezwan Aplus": ["Nur Arissa Irdina Mohammad Ezwan","Muhammad Wafiy Iman mohammad Ezwan"],
+
+  // ── Al-Faqeh → Hj Harun → Hj Sharifuddin ──
+  "Muhd Zulkifli Hj Sharifuddin & Noor Kasmil Nazura": ["Muhammad Zulhaily Nazmi Muhd Zulkifli","Muhammad Zulhairy Nazmi Muhd Zulkifli","Nur Zuhairah Naqiya Muhd Zulkifli"],
+  "Sulaiman Hj Sharifuddin & Rina Shanti Kartika Zulkarnen": ["Muhammad Adib Asyraaf Sulaiman","Nur Syazwani Batrisya Sulaiman","Nur Syafiah Basyirah Sulaiman"],
+  "Muhd Hafiz Hj Sharifuddin & Suhana Abd Hamid": ["Muhammad Fakeh Iman Muhd Hafiz"],
+  "Siti Farhaini Hj Sharifuddin & Muzafil Huzairin Mukmin": ["Muhammad Qaliff Haziq Muzafil","Muhammad Aqil Raikhal Muzafil"],
+
+  // ── Al-Faqeh → Hj Harun → Hjh Jumaiyah ──
+  "Ahmad Fitri Abd Mutalib & Nuruljanna Othman": ["Nur Aathirah Sofia Ahmad Fitri"],
+
+  // ── Al-Faqeh → Hj Harun → Hjh Raudhiah ──
+  "Mohd Jamil Subhi Hj Kamarul Zaman & Sofieyatul Akmar Ismail": [],
+
+  // ── Al-Faqeh → Hj Othman → Hj Kamaruddin ──
+  "Sabarina Akmal Hj Kamaruddin & Saiful Edi": ["Syabil Akmal Saiful","Kipie Saiful","Zara Saiful"],
+  "Mohd Adeeb Hj Kamaruddin & Siti Nurfazilah": ["Nuraliyah izzati Mohd Adeeb","Mohd Arif Syafie Mohd Adeeb"],
+  "Firdaus Hj Kamaruddin & Nurbaizura": ["Darwish Firdaus","Alisya Firdaus","Sufian Firdaus"],
+
+  // ── Al-Faqeh → Hj Othman → Hj Mohd Ali ──
+  "Saiful Irwan Hj Mohd Ali & Tengku Suzilawati": ["Puteri Shirin","Puteri Shariz"],
+  "Syamsul Amri Hj Mohd Ali & Shaidatul Akmar": ["Shahir Syamsul Amri","Nuralisha Syamsul Amri"],
+};
+
+// ── CASCADE HELPERS ───────────────────────────────────────────────────────────
+function fillSel(id, options, placeholder) {
+  const sel = document.getElementById(id);
+  sel.innerHTML = `<option value="">${placeholder}</option>`;
+  options.forEach(v => {
+    const o = document.createElement("option");
+    o.value = o.textContent = v;
+    sel.appendChild(o);
+  });
+  sel.disabled = options.length === 0;
+}
+
+function resetFrom(startId) {
+  const order = ["gen2","gen3","gen4","gen5"];
+  const placeholders = [
+    "— Pilih Generasi 1 dahulu —",
+    "— Pilih Generasi 2 dahulu —",
+    "— Pilih Generasi 3 dahulu —",
+    "",
+  ];
+  let found = false;
+  order.forEach((id, i) => {
+    if (id === startId) found = true;
+    if (found) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (el.tagName === "SELECT") {
+        el.innerHTML = `<option value="">${placeholders[i]}</option>`;
+        el.disabled = true;
+      } else {
+        el.value = "";
+        el.disabled = true;
+      }
+    }
+  });
+}
+
+// Gen1 → Gen2
+document.getElementById("gen1").addEventListener("change", function () {
+  resetFrom("gen2");
+  const opts = gen2Map[this.value] || [];
+  fillSel("gen2", opts, opts.length ? "— Sila Pilih —" : "— Tiada cabang —");
+  document.getElementById("gen2").disabled = opts.length === 0;
+});
+
+// Gen2 → Gen3
+document.getElementById("gen2").addEventListener("change", function () {
+  resetFrom("gen3");
+  const opts = gen3Map[this.value] || [];
+  fillSel("gen3", opts, opts.length ? "— Sila Pilih —" : "— Tiada sub-cabang —");
+  document.getElementById("gen3").disabled = opts.length === 0;
+});
+
+// Gen3 → Gen4
+document.getElementById("gen3").addEventListener("change", function () {
+  resetFrom("gen4");
+  resetGen5();
+  const opts = gen4Map[this.value] || [];
+  const sel = document.getElementById("gen4");
+  const txt = document.getElementById("gen4_text");
+
+  if (opts.length > 0) {
+    fillSel("gen4", opts, "— Sila Pilih —");
+    sel.style.display = "";
+    sel.disabled = false;
+    txt.style.display = "none";
+    txt.disabled = true;
+    txt.value = "";
+  } else if (this.value) {
+    sel.style.display = "none";
+    sel.disabled = true;
+    txt.style.display = "";
+    txt.disabled = false;
+    txt.value = "";
+    // no gen4 dropdown — enable gen5 free-text directly
+    enableGen5FreeText();
+  }
+});
+
+// Gen4 select → Gen5
+document.getElementById("gen4").addEventListener("change", function () {
+  resetGen5();
+  if (!this.value) return;
+  const opts = gen5Map[this.value] || null;
+  if (opts && opts.length > 0) {
+    showGen5Dropdown(opts);
+  } else {
+    enableGen5FreeText();
+  }
+});
+
+// Gen4 text input → Gen5 free text (always free text when gen4 is typed)
+document.getElementById("gen4_text").addEventListener("input", function () {
+  resetGen5();
+  if (this.value.trim()) enableGen5FreeText();
+});
+
+function resetGen5() {
+  // hide both dropdown and free-text list, clear all
+  const wrapper = document.getElementById("gen5_select_wrapper");
+  const listWrapper = document.getElementById("gen5_wrapper");
+  if (wrapper) { wrapper.style.display = "none"; document.getElementById("gen5_select").innerHTML = ""; }
+  if (listWrapper) {
+    document.getElementById("gen5_list").innerHTML = "";
+    document.getElementById("gen5_add_btn").disabled = true;
+    document.getElementById("gen5_label_mode").textContent = "Generasi 5";
+    listWrapper.style.display = "none";
+  }
+}
+
+function showGen5Dropdown(opts) {
+  const wrapper = document.getElementById("gen5_select_wrapper");
+  const sel = document.getElementById("gen5_select");
+  wrapper.style.display = "";
+  fillSel("gen5_select", opts, "— Sila Pilih —");
+  sel.disabled = false;
+}
+
+function enableGen5FreeText() {
+  const listWrapper = document.getElementById("gen5_wrapper");
+  listWrapper.style.display = "";
+  document.getElementById("gen5_add_btn").disabled = false;
+  if (document.getElementById("gen5_list").children.length === 0) addGen5();
+}
+
+// ── GEN5 DYNAMIC LIST ────────────────────────────────────────────────────────
+function addGen5() {
+  const list = document.getElementById("gen5_list");
+  const idx  = list.children.length + 1;
+  const row  = document.createElement("div");
+  row.className = "gen5-row";
+  row.innerHTML = `
+    <input name="keturunan_generasi_5[]" placeholder="Nama anak ke-${idx}" style="flex:1"/>
+    <button type="button" class="gen5-remove" onclick="removeGen5(this)" title="Buang">✕</button>`;
+  list.appendChild(row);
+}
+
+function removeGen5(btn) {
+  btn.closest(".gen5-row").remove();
+  // re-number placeholders
+  document.querySelectorAll("#gen5_list .gen5-row input").forEach((inp, i) => {
+    inp.placeholder = `Nama anak ke-${i+1}`;
+  });
+}
+
+function getGen5Values() {
+  return Array.from(document.querySelectorAll("#gen5_list .gen5-row input"))
+    .map(i => i.value.trim()).filter(Boolean).join(", ");
+}
+
+function addGen6() {
+  const list = document.getElementById("gen6_list");
+  const idx  = list.children.length + 1;
+  const row  = document.createElement("div");
+  row.className = "gen5-row";
+  row.innerHTML = `
+    <input name="keturunan_generasi_6[]" placeholder="Nama anak ke-${idx}" style="flex:1"/>
+    <button type="button" class="gen5-remove" onclick="removeGen6(this)" title="Buang">✕</button>`;
+  list.appendChild(row);
+}
+
+function removeGen6(btn) {
+  btn.closest(".gen5-row").remove();
+  document.querySelectorAll("#gen6_list .gen5-row input").forEach((inp, i) => {
+    inp.placeholder = `Nama anak ke-${i+1}`;
+  });
+}
+
+function getGen6Values() {
+  return Array.from(document.querySelectorAll("#gen6_list .gen5-row input"))
+    .map(i => i.value.trim()).filter(Boolean).join(", ");
+}
+
+// ── SUMMARY ───────────────────────────────────────────────────────────────────
+function gv(id){
+  if (id === "gen4") {
+    const sel = document.getElementById("gen4");
+    const txt = document.getElementById("gen4_text");
+    if (txt && txt.style.display !== "none") return txt.value || "";
+    return (sel || {}).value || "";
+  }
+  if (id === "gen5") {
+    const sel = document.getElementById("gen5_select");
+    const selW = document.getElementById("gen5_select_wrapper");
+    if (selW && selW.style.display !== "none" && sel && sel.value) return sel.value;
+    return getGen5Values();
+  }
+  if (id === "gen6") return getGen6Values();
+  return (document.getElementById(id)||{}).value || "";
+}
+
+function buildSummary(){
+  const items = [
+    ["Nama Penuh",         gv("nama_penuh")],
+    ["No. Telefon",        gv("no_hp")],
+    ["Jantina",            gv("jantina")],
+    ["Tarikh Lahir",       gv("tarikh_lahir")],
+    ["Negeri",             gv("negeri")],
+    ["Status Ahli",        gv("status_ahli")],
+    ["Keluarga Besar (Gen 1)", gv("gen1")],
+    ["Generasi 2",         gv("gen2")],
+    ["Generasi 3",         gv("gen3")],
+    ["Generasi 4",         gv("gen4")],
+    ["Generasi 5",         gv("gen5") || "—"],
+    ["Generasi 6",         gv("gen6")],
+    ["Pelajaran",          gv("pelajaran")],
+    ["Status Kerjaya",     gv("status_kerjaya")],
+  ];
+  const grid = document.getElementById("summaryGrid");
+  grid.innerHTML = "";
+  items.forEach(([lbl,val])=>{
+    const d = document.createElement("div");
+    d.className = "summary-item" + (val ? "" : " empty");
+    d.innerHTML = `<div class="s-label">${lbl}</div><div class="s-val">${val || "—"}</div>`;
+    grid.appendChild(d);
+  });
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────────────────────
+async function submitForm(){
+  if(!validateStep(4)) return;
+  const btn = document.getElementById("submitBtn");
+  const err = document.getElementById("errMsg");
+  btn.disabled = true; btn.querySelector("span").textContent = "Menghantar…";
+  err.style.display = "none";
+
+  const dob = document.getElementById("tarikh_lahir").value;
+  const age  = dob ? (() => {
+    const d = new Date(dob), t = new Date();
+    let a = t.getFullYear()-d.getFullYear();
+    if(t.getMonth()-d.getMonth()<0||(t.getMonth()===d.getMonth()&&t.getDate()<d.getDate()))a--;
+    return a;
+  })() : "";
+
+  const payload = {
+    nama_penuh:            gv("nama_penuh"),
+    keluarga_besar:        gv("gen1"),
+    status_ahli:           gv("status_ahli"),
+    no_hp:                 gv("no_hp"),
+    tarikh_lahir:          dob,
+    umur:                  age,
+    jantina:               gv("jantina"),
+    negeri:                gv("negeri"),
+    alamat:                gv("alamat"),
+    pelajaran_tertinggi:   gv("pelajaran"),
+    bidang_pengkhususan:   gv("bidang"),
+    status_kerjaya:        gv("status_kerjaya"),
+    jawatan:               gv("jawatan"),
+    organisasi:            gv("organisasi"),
+    industri:              gv("industri"),
+    keturunan_generasi_1:  gv("gen1"),
+    keturunan_generasi_2:  gv("gen2"),
+    keturunan_generasi_3:  gv("gen3"),
+    laluan_generasi_4:     gv("gen4"),
+    keturunan_generasi_5:  gv("gen5"),
+    keturunan_generasi_6:  gv("gen6"),
+    hadir_family_day:      gv("hadir"),
+    setuju_cabutan:        gv("cabutan"),
+    tarikh_hantar:         new Date().toISOString(),
+    sumber_data:           "Borang Online",
+  };
+
+  if(APPS_SCRIPT_URL === "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE"){
+    // Demo mode — just show success
+    showSuccess();
+    return;
+  }
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method:"POST",
+      body: JSON.stringify(payload),
+    });
+    if(res.ok){ showSuccess(); }
+    else { throw new Error("Server error "+res.status); }
+  } catch(e) {
+    err.textContent = "Penghantaran gagal. Semak URL Apps Script dan cuba semula. ("+e.message+")";
+    err.style.display = "block";
+    btn.disabled = false; btn.querySelector("span").textContent = "Hantar Sekarang";
+  }
+}
+
+function showSuccess(){
+  for(let i=1;i<=4;i++) document.getElementById("step"+i).classList.remove("active");
+  document.getElementById("progressBar").style.display = "none";
+  const sc = document.getElementById("successScreen");
+  sc.style.display = "block"; sc.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function resetAll(){
+  document.querySelectorAll("input,select,textarea").forEach(el=>{
+    if(el.type==="checkbox") el.checked=false;
+    else el.value="";
+  });
+  document.getElementById("umur_display").textContent = "— isi tarikh lahir —";
+  resetFrom("gen2");
+  // reset gen5
+  document.getElementById("gen5_list").innerHTML = "";
+  const g5btn = document.getElementById("gen5_add_btn");
+  if (g5btn) g5btn.disabled = true;
+  const g5sw = document.getElementById("gen5_select_wrapper");
+  if (g5sw) { g5sw.style.display = "none"; document.getElementById("gen5_select").innerHTML = ""; }
+  const g5w = document.getElementById("gen5_wrapper");
+  if (g5w) g5w.style.display = "none";
+  // reset gen6 list
+  document.getElementById("gen6_list").innerHTML = "";
+  // reset gen4 toggle back to select mode
+  const g4sel = document.getElementById("gen4");
+  const g4txt = document.getElementById("gen4_text");
+  if (g4sel) { g4sel.style.display = ""; }
+  if (g4txt) { g4txt.style.display = "none"; g4txt.disabled = true; g4txt.value = ""; }
+  document.getElementById("successScreen").style.display = "none";
+  document.getElementById("successScreen").classList.remove("active");
+  document.getElementById("progressBar").style.display = "flex";
+  currentStep = 1;
+  document.getElementById("step1").classList.add("active");
+  buildProgress();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.getElementById("tarikh_lahir").max = new Date().toISOString().split("T")[0];
+buildProgress();
+</script>
+</body>
+</html>
